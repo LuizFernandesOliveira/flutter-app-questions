@@ -10,7 +10,6 @@ class Response extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.blue,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
         onPressed: onSelected,
