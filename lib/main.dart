@@ -1,26 +1,38 @@
-import 'package:app_questions/response.dart';
 import 'package:flutter/material.dart';
-import './question.dart';
+import './result.dart';
+import './questionary.dart';
 
 main() => runApp(QuestionApp());
 
 class _QuestionsAppState extends State<QuestionApp> {
   var _selectedQuestion = 0;
+  final List<Map<String, Object>> _questions = const [
+    {
+      'text': 'Question 1',
+      'responses': ['1', '2', '3']
+    },
+    {
+      'text': 'Question 2',
+      'responses': ['1', '2', '3']
+    }
+  ];
 
   void _response() {
-    setState(() {
-      _selectedQuestion++;
-    });
+    if (hasQuestionsSelected) {
+      setState(() {
+        _selectedQuestion++;
+      });
+    }
+
     print(_selectedQuestion);
+  }
+
+  bool get hasQuestionsSelected {
+    return _selectedQuestion < _questions.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> questions = [
-      'Question 1',
-      'Question 2'
-    ];
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -28,14 +40,9 @@ class _QuestionsAppState extends State<QuestionApp> {
             child: Text('Questions'),
           ),
         ),
-        body: Column(
-          children: <Widget>[
-            Question(text: questions[_selectedQuestion]),
-            Response(text: 'reason 1', onSelected: _response),
-            Response(text: 'reason 2', onSelected: _response),
-            Response(text: 'reason 3', onSelected: _response),
-          ],
-        ),
+        body: hasQuestionsSelected
+        ? Questionary(selectedQuestion: _selectedQuestion, questions: _questions, response: _response)
+        : Result(),
       ),
     );
   }
