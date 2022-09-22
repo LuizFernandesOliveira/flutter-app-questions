@@ -1,3 +1,4 @@
+import 'package:app_questions/response.dart';
 import 'package:flutter/material.dart';
 import './question.dart';
 
@@ -30,16 +31,9 @@ class _QuestionsAppState extends State<QuestionApp> {
         body: Column(
           children: <Widget>[
             Question(text: questions[_selectedQuestion]),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
-              onPressed: _response,
-              child: Text('reason 1'),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20)),
-              onPressed: _response,
-              child: Text('reason 2'),
-            ),
+            Response(text: 'reason 1', onSelected: _response),
+            Response(text: 'reason 2', onSelected: _response),
+            Response(text: 'reason 3', onSelected: _response),
           ],
         ),
       ),
